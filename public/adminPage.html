@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            min-width: 250px;
+        }
+
+        /* Include the padding and border in an element's total width and height */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Remove margins and padding from the list */
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style the list items */
+        ul li {
+            cursor: pointer;
+            position: relative;
+            /* padding: 5px 0px 12px 40px; */
+
+            padding-top: 18px;
+            padding-right: 150px;
+            padding-bottom: 18px;
+            padding-left: 18px;
+
+            list-style-type: none;
+            background: #eee;
+            font-size: 18px;
+            transition: 0.2s;
+
+            /* make the list items unselectable */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Set all odd list items to a different color (zebra-stripes) */
+        ul li:nth-child(odd) {
+            background: #f9f9f9;
+
+
+        }
+
+        /* Darker background-color on hover */
+        ul li:hover {
+            background: #ddd;
+        }
+
+
+
+        /* Style the verify button */
+        .verify {
+            right: 90px;
+            top: 0;
+            position: absolute;
+            padding: 2px 4px 2px 4px;
+        }
+
+        .verify:hover {
+            background-color: green;
+            color: white;
+        }
+
+        /* Style the remove button */
+        .remove {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 2px 4px 2px 4px;
+        }
+
+        .remove:hover {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .aadhar {
+            right: 90px;
+            top: 40px;
+            position: absolute;
+            padding: 2px 4px 2px 4px;
+        }
+
+        .aadhar:hover {
+            background-color: #02a3a3;
+            color: white;
+        }
+
+        .pan {
+            position: absolute;
+            right: 0;
+            top: 40px;
+            padding: 2px 4px 2px 4px;
+        }
+
+        .pan:hover {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .passbook {
+            right: 90px;
+            top: 75px;
+            position: absolute;
+            padding: 2px 4px 2px 4px;
+        }
+
+        .passbook:hover {
+            background-color: #001aff;
+            color: white;
+        }
+
+        .photo {
+            position: absolute;
+            right: 0;
+            top: 75px;
+            padding: 2px 4px 2px 4px;
+        }
+
+        .photo:hover {
+            background-color: #a35b67;
+            color: white;
+        }
+
+
+
+        /* Style the header */
+        .header {
+            background-color: rgb(0, 248, 62);
+            padding: 30px 40px;
+            color: white;
+            text-align: center;
+        }
+
+        /* Clear floats after the header */
+        .header:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="allUserData" class="header">
+        <h2 style="margin:5px">HR Portal</h2>
+        <a href="index.html"><button>Go Back to Employee Portal </button></a>
+
+    </div>
+
+    <ul id="allUser"> </ul>
+    <script src="readAllUser.js"></script>
+
+    <script>
+        window.onload = function () {
+            readAllUser();
+        };
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
+    <script src="changeVerification.js"></script>
+    <script scr="readAllUser.js"></script>
+    <script src="deleteUser.js"></script>
+
+
+    <script>
+
+
+        var firebaseConfig = {
+            //Add Config here
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+
+        var db = firebase.firestore();
+    </script>
+
+
+</body>
+
+</html>

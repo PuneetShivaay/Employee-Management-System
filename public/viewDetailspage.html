@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Details</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        body {
+            background: #fff;
+            padding: 0px;
+            margin: 0px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 15px;
+        }
+
+        h3 {
+            text-align: center;
+            font-weight: 700;
+        }
+
+        input,
+        button {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+        }
+
+        .main-div,
+        .loggedin-div {
+            width: 20%;
+            margin: 0px auto;
+            margin-top: 60px;
+            padding: 20px;
+            display: none;
+        }
+
+        .main-div input {
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fff;
+            padding: 15px;
+            outline: none;
+            width: 100%;
+            margin-bottom: 20px;
+            transition: 0.3s;
+            -webkit-transition: 0.3s;
+            -moz-transition: 0.3s;
+        }
+
+        .main-div input:focus {
+            border: 1px solid #777;
+
+        }
+
+        .main-div button,
+        .loggedin-div button {
+            background: #fd0000;
+            color: #fff;
+            border: 1px solid #ff0000;
+            border-radius: 5px;
+            padding: 15px;
+            display: block;
+            width: 100%;
+            transition: 0.3s;
+            -webkit-transition: 0.3s;
+            -moz-transition: 0.3s;
+        }
+
+        .main-div button:hover,
+        .loggedin-div button:hover {
+            background: #fff;
+            color: #ff0000;
+            border: 1px solid #ff0000;
+            cursor: pointer;
+        }
+    </style>
+
+    <!-- Style For Logged in screen with 3 splits -->
+    <style>
+        .split {
+            height: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            overflow-x: hidden;
+            padding: 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+            -webkit-transition: 0.3s;
+            -moz-transition: 0.3s;
+            /* border: 3px solid rgb(0, 0, 0); */
+            border-radius: 4px;
+
+        }
+
+
+
+        .left {
+            width: 20%;
+            left: 0;
+            background-color: rgb(16, 232, 240);
+        }
+
+        .right {
+            width: 80%;
+            right: 0;
+            background-color: rgb(80, 253, 11);
+        }
+    </style>
+
+    <style>
+        ul {
+            margin: 0;
+            padding: 10;
+        }
+
+        ul li {
+            cursor: pointer;
+            position: relative;
+            padding: 12px 8px 12px 40px;
+            list-style-type: none;
+            background: #eee;
+            font-size: 18px;
+            transition: 0.2s;
+
+            /* make the list items unselectable */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Set all odd list items to a different color (zebra-stripes) */
+        ul li:nth-child(odd) {
+            background: #f9f9f9;
+        }
+
+        /* Darker background-color on hover */
+        ul li:hover {
+            background: #ddd;
+        }
+
+        /* Style the close button */
+        .close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 12px 16px 12px 16px;
+        }
+
+        .close:hover {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+
+
+
+
+
+</head>
+
+<body>
+
+    <div class="split left">
+        <div>
+            <!-- <h3> Welcome User</h3> -->
+            <p id="user_para">Welcome to Er-Dr Employee Portal. You're currently logged in.</p>
+
+            <button onclick='logout()' style="position: absolute; left: 18%;">LogOut</button>
+            <a href="index.html" style="position: absolute; left: 18%; top: 22%;"">
+                <button>View Dashboard</button>
+            </a>
+
+            <a href=" updateDetailsPage.html" style="position: absolute; left: 18%; top: 28%;"">
+                <button>Update Details</button>
+            </a>
+            <a href=" message.html" style="position: absolute; left: 18%; top: 34%;"">
+                <button>Messages</button>
+            </a>
+
+
+        </div>
+    </div>
+
+    <div class=" split right">
+                <div>
+                    <h3>My Details </h3>
+                    <!-- <a href="adminPage.html"><button style="position: absolute; right: 18%;">Go to
+                Admin Panel </button></a> -->
+                    <ul id="reUL"></ul>
+                    <br>
+                    <br>
+                </div>
+        </div>
+
+
+
+
+
+
+
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
+
+        <script src="create_uuid.js"></script>
+        <script src="RegisterPage.js"></script>
+        <script src="loginPage.js"></script>
+        <script src="Register.js"></script>
+        <script src="getDate.js"></script>
+        <script src="changeVerification.js"></script>
+        <script scr="readAllUser.js"></script>
+        <script src="deleteUser.js"></script>
+        <script src="updateDetail.js"></script>
+        <script src="getAadhar.js"></script>
+        <script src="getPan.js"></script>
+        <script src="getPassbook.js"></script>
+        <script src="getPhoto.js"></script>
+        <script src="getSignature.js"></script>
+
+        <script>
+            var firebaseConfig = {
+                //Add Config here
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+
+
+            var db = firebase.firestore();
+        </script>
+        <script src="auth.js"></script>
+        <script src="serverTime.js"></script>
+        <script src="userDetails.js"></script>
+        <script src="userdetailsList.js"></script>
+        <script src="readAllUser.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messaging</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+
+    <!-- Style for chat window -->
+    <style>
+        header {
+            text-align: center;
+        }
+
+        #messages {
+            padding-bottom: 30%;
+        }
+
+        li {
+            list-style-type: none;
+            margin-bottom: 10px;
+            background-color: #6929ca;
+            padding: 5px;
+            border-radius: 10px;
+            color: white;
+            width: 50%;
+        }
+
+        li span {
+            font-style: italic;
+            font-weight: bolder;
+            color: #b5b0b9;
+        }
+
+        #chat {
+            width: 80%;
+            margin: auto;
+        }
+
+        #message-form {
+            text-align: center;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #b7b5b9;
+        }
+
+        input {
+            width: 70%;
+            height: 30px;
+        }
+
+
+
+        .sent {
+            text-align: right;
+            background-color: #a79cb3;
+            margin-left: 50%;
+        }
+
+        .sent span {
+            margin-left: 5px;
+            color: #6929ca;
+        }
+    </style>
+
+
+    <style>
+        body {
+            background: #fff;
+            padding: 5px;
+            margin: 0px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 15px;
+        }
+
+        h3 {
+            text-align: center;
+            font-weight: 700;
+        }
+
+        input,
+        button {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+        }
+
+        .main-div,
+        .loggedin-div {
+            width: 20%;
+            margin: 0px auto;
+            margin-top: 60px;
+            padding: 20px;
+            display: none;
+        }
+
+        .main-div input {
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fff;
+            padding: 15px;
+            outline: none;
+            width: 100%;
+            margin-bottom: 20px;
+            transition: 0.3s;
+            -webkit-transition: 0.3s;
+            -moz-transition: 0.3s;
+        }
+    </style>
+
+    <style>
+        .split {
+            height: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            overflow-x: hidden;
+            padding: 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+            -webkit-transition: 0.3s;
+            -moz-transition: 0.3s;
+            /* border: 3px solid rgb(0, 0, 0); */
+            border-radius: 4px;
+
+        }
+
+
+
+        .left {
+            width: 18%;
+            left: 0;
+            background-color: rgb(4, 0, 255);
+        }
+
+        .right {
+            width: 78%;
+            right: 0;
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+
+</head>
+
+<body>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-database.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            //Add Config here
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+
+        var db = firebase.firestore();
+
+
+        var userName;
+
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                var uid = user.uid;
+                userName = user.displayName;
+                // ...
+            } else {
+                // User is signed out
+                // ...
+            }
+        });
+
+
+
+        function sendMessage() {
+            //get message
+            var message = document.getElementById("message").value;
+
+            //save in database
+            firebase.database().ref("messages").push().set({
+
+                "sender": userName,
+                "message": message
+            });
+            return false;
+        }
+
+        //listen for incom,ing message
+        firebase.database().ref("messages").on("child_added", function (snapshot) {
+            var html = "";
+            //gie each msg a unique id
+            html += "<li id = 'message-" + snapshot.key + "'>";
+            //show delete button if msg is sent by me
+            // if (snapshot.val().sender == userName) {
+            //     html += "<button data-id='" + snapshot.key + "'onclick='deleteMessage(this);'>";
+            //     html += "Delete";
+            //     html += "</button>";
+
+            // }
+            html += snapshot.val().sender + ": " + snapshot.val().message;
+            html += "</li>";
+
+            document.getElementById("messages").innerHTML += html;
+
+        });
+
+
+        // function deleteMessage(self) {
+        //     //get msg id
+        //     var messageID = self.getAttribute("data-id");
+        //     //delete msg
+        //     firebase.database().ref("messages").child(messageID).remove();
+        // }
+
+        // //attach listener for delete msgs
+        // firebase.database().ref("messages").on("child_removed", function (snapshot) {
+        //     //remove msg node
+        //     document.getElementById("message-" + snapshot.key).innerHTML = "This message has been removed";
+        // });
+    </script>
+
+
+
+    <div id="user_div" ">
+        <div class=" split left">
+
+        <!-- <h3> Welcome User</h3> -->
+        <p id="user_para">Welcome to Er-Dr Employee Portal. You're currently logged in.</p>
+
+        <button onclick='logout()' style="position: absolute; left: 18%;">LogOut</button>
+
+        <a href="viewDetailspage.html" style="position: absolute; left: 18%; top: 20%;"">
+                    <button>view Details</button>
+        </a>
+        <a href=" updateDetailsPage.html" style="position: absolute; left: 18%; top: 26%;"">
+                    <button>Update Details</button>
+        </a>  
+        </div>
+
+        <div class=" split right">
+            <h3>Your Conversation</h3>
+            <!-- Form to send message -->
+            <form onsubmit="return sendMessage();">
+                <input id="message" placeholder="Enter Message" autocomplete="off">
+                <input type="submit">
+            </form>
+
+            <!-- Create a list -->
+            <ul id="messages"></ul>
+    </div>
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Details Page</title>
+    <style>
+        body {
+            background: #fff;
+            padding: 0px;
+            margin: 0px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 15px;
+        }
+
+        h3 {
+            text-align: center;
+            font-weight: 700;
+        }
+
+        input,
+        button {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+        }
+
+        .main-div,
+        .loggedin-div {
+            width: 20%;
+            margin: 0px auto;
+            margin-top: 60px;
+            padding: 20px;
+            display: none;
+        }
+
+        .main-div input {
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fff;
+            padding: 15px;
+            outline: none;
+            width: 100%;
+            margin-bottom: 20px;
+            transition: 0.3s;
+            -webkit-transition: 0.3s;
+            -moz-transition: 0.3s;
+        }
+
+        .main-div input:focus {
+            border: 1px solid #777;
+
+        }
+
+        .main-div button,
+        .loggedin-div button {
+            background: #fd0000;
+            color: #fff;
+            border: 1px solid #ff0000;
+            border-radius: 5px;
+            padding: 15px;
+            display: block;
+            width: 100%;
+            transition: 0.3s;
+            -webkit-transition: 0.3s;
+            -moz-transition: 0.3s;
+        }
+
+        .main-div button:hover,
+        .loggedin-div button:hover {
+            background: #fff;
+            color: #ff0000;
+            border: 1px solid #ff0000;
+            cursor: pointer;
+        }
+    </style>
+
+    <!-- Style For Logged in screen with 3 splits -->
+    <style>
+        .split {
+            height: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            overflow-x: hidden;
+            padding: 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+            -webkit-transition: 0.3s;
+            -moz-transition: 0.3s;
+            /* border: 3px solid rgb(0, 0, 0); */
+            border-radius: 4px;
+
+        }
+
+
+
+        .left {
+            width: 20%;
+            left: 0;
+            background-color: rgb(16, 232, 240);
+        }
+
+        .right {
+            width: 40%;
+            right: 0;
+            background-color: rgb(80, 253, 11);
+        }
+
+        .middle {
+            width: 80%;
+            left: 21%;
+            background-color: rgb(255, 255, 255);
+
+
+        }
+    </style>
+
+    <style>
+        ul {
+            margin: 0;
+            padding: 10;
+        }
+
+        ul li {
+            cursor: pointer;
+            position: relative;
+            padding: 12px 8px 12px 40px;
+            list-style-type: none;
+            background: #eee;
+            font-size: 18px;
+            transition: 0.2s;
+
+            /* make the list items unselectable */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Set all odd list items to a different color (zebra-stripes) */
+        ul li:nth-child(odd) {
+            background: #f9f9f9;
+        }
+
+        /* Darker background-color on hover */
+        ul li:hover {
+            background: #ddd;
+        }
+
+        /* Style the close button */
+        .close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 12px 16px 12px 16px;
+        }
+
+        .close:hover {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="user_div">
+
+        <div class="split left">
+            <div>
+                <!-- <h3> Welcome User</h3> -->
+                <p id="user_para">Welcome to Er-Dr Employee Portal. You're currently logged in.</p>
+
+                <button onclick='logout()' style="position: absolute; left: 18%;">LogOut</button>
+
+                <a href="index.html" style="position: absolute; left: 18%; top: 26%;"">
+                    <button>View Dashboard</button>
+                </a>
+
+
+                <a href=" viewDetailspage.html" style="position: absolute; left: 18%; top: 20%;"">
+                    <button>view Details</button>
+                </a>
+                <a href=" message.html" style="position: absolute; left: 18%; top: 34%;"">
+                    <button>Messages</button>
+                </a>
+
+            </div>
+        </div>
+
+
+        <div class=" split middle">
+                    <h3> Update Your Details Here </h3>
+
+                    <label for="DateOfAppointment_field">Date of Appointment:</label>
+                    <input class="w3-input w3-border" type="date" id="DateOfAppointment_field"
+                        name="DateOfAppointment_field" min="2000-01-02">
+                    <br>
+                    <label for="Appointment_field">Appointment Type:</label>
+                    <input class="w3-input w3-border" type="name" placeholder="Fulltime/ Part Time"
+                        id="Appointment_field" />
+                    <br>
+                    <label for="AddressOfCommunication_field">Address of Communication *..:</label>
+                    <input class="w3-input w3-border" type="name" placeholder="Address of Communication *..."
+                        id="AddressOfCommunication_field" />
+                    <br>
+                    <label for="PermanentAddress_field">Permanent Address *:</label>
+                    <input class="w3-input w3-border" type="name" placeholder="Permanent Address *"
+                        id="PermanentAddress_field" />
+                    <br>
+                    <label for="phoneNumber_field">Phone number *:</label>
+                    <input class="w3-input w3-border" type="tel" placeholder="Phone number *" id="phoneNumber_field" />
+                    <br>
+                    <label for="WhatsAppNumber_field">WhatsApp Number *:</label>
+                    <input class="w3-input w3-border" type="tel" placeholder="WhatsApp Number *"
+                        id="WhatsAppNumber_field" />
+                    <br>
+                    <label for="AadharNumber_field">Aadhar Number*:</label>
+                    <input class="w3-input w3-border" type="number" placeholder="Aadhar Number *"
+                        id="AadharNumber_field" min="12" max="12" />
+                    <br>
+                    <label for="UploadYourAadhar_field">Upload Your Aadhar </label>
+                    <!-- <progress value="0" id="aadharUploader" max="100">0%</progress> -->
+                    <input class="w3-input w3-border" type="file" onchange="getAadhar(this,id)"
+                        id="UploadYourAadhar_field" />
+
+                    <br>
+                    <label for="PANnumber_field">PAN Number*:</label>
+                    <input class="w3-input w3-border" type="name" placeholder="PAN Number" id="PANnumber_field" />
+                    <br>
+                    <label for="UploadYourPAN_field">Upload PAN Card </label>
+                    <input class="w3-input w3-border" type="file" onchange="getPan(this,id)"
+                        placeholder="Upload Your PAN" id="UploadYourPAN_field" />
+                    <br>
+                    <label for="BankName_field">Enter Your Bank Name </label>
+                    <input class="w3-input w3-border" type="name" placeholder="Enter Your Bank Name *"
+                        id="BankName_field" />
+                    <br>
+                    <label for="IFSCcode_field">Enter Your Bank IFSC Code </label>
+                    <input class="w3-input w3-border" type="name" placeholder="Enter Your Bank IFSC Code *"
+                        id="IFSCcode_field" />
+                    <br>
+                    <label for="AccountNumber_field">Enter Your Account Number </label>
+                    <input class="w3-input w3-border" type="name" placeholder="Enter Your Account Number*"
+                        id="AccountNumber_field" />
+                    <br>
+                    <label for="BankPhotoCopy_field">Upload Bank Passbook</label>
+                    <input class="w3-input w3-border" type="file" onchange="getPassbook(this,id)"
+                        id="BankPhotoCopy_field" />
+                    <br>
+                    <label for="Photo_field">Upload Your Photo</label>
+                    <input class="w3-input w3-border" type="file" onchange="getPhoto(this,id)" id="Photo_field" />
+                    <br>
+                    <label for="Signature_field">Upload Your Signature</label>
+                    <input class="w3-input w3-border" type="file" onchange="getSignature(this,id)"
+                        id="Signature_field" />
+                    <br>
+                    <input class="w3-check" type="checkbox" checked="checked" id=" Declaration_field" name="Declaration"
+                        value="Yes">
+                    <label for="Declaration_field"> I do hereby declare that all the information given above is true to
+                        the best
+                        of my knowledge and belief. </label>
+                    <br>
+                    <button onclick="updateDetails()">Submit Details</button>
+                    <br>
+
+                    <ul id="myUL"></ul>
+
+            </div>
+        </div>
+
+
+        <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
+
+        <script src="create_uuid.js"></script>
+        <script src="RegisterPage.js"></script>
+        <script src="loginPage.js"></script>
+        <script src="Register.js"></script>
+        <script src="getDate.js"></script>
+        <script src="changeVerification.js"></script>
+        <script scr="readAllUser.js"></script>
+        <script src="deleteUser.js"></script>
+        <script src="updateDetail.js"></script>
+        <script src="getAadhar.js"></script>
+        <script src="getPan.js"></script>
+        <script src="getPassbook.js"></script>
+        <script src="getPhoto.js"></script>
+        <script src="getSignature.js"></script>
+
+        <script>
+            var firebaseConfig = {
+                //Add Config here
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+
+            var db = firebase.firestore();
+        </script>
+        <script src="auth.js"></script>
+        <script src="serverTime.js"></script>
+        <script src="userDetails.js"></script>
+        <script src="userdetailsList.js"></script>
+        <script src="readAllUser.js"></script>
+</body>
+
+</html>
